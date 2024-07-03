@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nginx-rs
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx        # Selector to match Pods with label 'app: nginx'
+  template:
+    metadata:
+      labels:
+        app: nginx        # Labels for Pods managed by this ReplicaSet
+        environment: staging
+        release: alpha-1.2
+        tier: mera-hai
+    spec:
+      containers:
+      - name: nginx-container
+        image: nginx:latest
+        ports:
+        - containerPort: 80
